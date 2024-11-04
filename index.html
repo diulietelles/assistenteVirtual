@@ -1,0 +1,174 @@
+<html><head><base href="." /><title>Assistente Virtual de Reunião</title>
+<style>
+/* Estilos gerais */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Estilo do botão assistente */
+.assistant-button {
+    position: relative;
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #2196F3, #4CAF50);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.assistant-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+}
+
+.assistant-button:active {
+    transform: translateY(1px);
+}
+
+/* Animação de pulso */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(33, 150, 243, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
+    }
+}
+
+.assistant-icon {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Status do assistente */
+.status {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #e3f2fd;
+    display: none;
+}
+
+.features-list {
+    text-align: left;
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.features-list li {
+    margin: 10px 0;
+    color: #555;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Assistente Virtual de Reunião</h1>
+    
+    <button class="assistant-button" onclick="toggleAssistant()">
+        <svg class="assistant-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="white"/>
+            <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill="white"/>
+        </svg>
+        Iniciar Assistente
+    </button>
+
+    <div id="status" class="status">
+        Assistente está ativo e pronto para ajudar!
+    </div>
+
+    <div class="features-list">
+        <h3>Recursos do Assistente:</h3>
+        <ul>
+            <li>📝 Registro automático de pontos discutidos</li>
+            <li>⏰ Lembretes de próximas reuniões</li>
+            <li>👥 Gerenciamento de ordem de fala</li>
+            <li>📊 Resumos inteligentes</li>
+            <li>✅ Acompanhamento de tarefas atribuídas</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+let assistantActive = false;
+
+function toggleAssistant() {
+    const button = document.querySelector('.assistant-button');
+    const status = document.getElementById('status');
+    assistantActive = !assistantActive;
+    
+    if (assistantActive) {
+        button.style.animation = 'pulse 2s infinite';
+        button.innerHTML = `
+            <svg class="assistant-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="white"/>
+                <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill="white"/>
+            </svg>
+            Desativar Assistente`;
+        status.style.display = 'block';
+        status.style.background = '#e8f5e9';
+        showNotification('Assistente Virtual ativado com sucesso!');
+    } else {
+        button.style.animation = 'none';
+        button.innerHTML = `
+            <svg class="assistant-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="white"/>
+                <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill="white"/>
+            </svg>
+            Iniciar Assistente`;
+        status.style.display = 'none';
+        showNotification('Assistente Virtual desativado!');
+    }
+}
+
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.style.position = 'fixed';
+    notification.style.top = '20px';
+    notification.style.right = '20px';
+    notification.style.padding = '15px 25px';
+    notification.style.background = '#4CAF50';
+    notification.style.color = 'white';
+    notification.style.borderRadius = '5px';
+    notification.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+    notification.style.zIndex = '1000';
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.transition = 'opacity 0.5s ease';
+        notification.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 500);
+    }, 3000);
+}
+</script>
+</body></html>
